@@ -8,7 +8,7 @@ from app.agent.memory_agent import MemoryAgent
 
 
 class UserInteractionAgent:
-    def __init__(self, itinerary_agent, weather_agent, news_agent, model_name="llama3.2:3b"):
+    def __init__(self, itinerary_agent,weather_agent, news_agent, model_name="llama3.2:3b"):
         self.model_name = model_name
         self.ollama_path = r"C:\Users\Vallabh\AppData\Local\Programs\Ollama\ollama"
         # self.memory_agent = memory_agent
@@ -29,7 +29,7 @@ class UserInteractionAgent:
 
             # Check if the prompt is about the weather
             if "weather" in prompt.lower() or "forecast" in prompt.lower():
-                city = conversation_state.get("city","Jaipur")
+                city = conversation_state.get("city","selected_city")
                 
                 # If city is not provided, prompt the user to specify
                 if not city:
@@ -39,7 +39,7 @@ class UserInteractionAgent:
                 # Fetch weather if city is available
                 return self.weather_agent.get_weather(city)
             if "news" in prompt.lower() or "current updates" in prompt.lower():
-                city = conversation_state.get("city","Paris")
+                city = conversation_state.get("city","selected_city")
                 
                 # If city is not provided, prompt the user to specify
                 if not city:
